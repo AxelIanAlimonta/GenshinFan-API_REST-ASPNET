@@ -1,0 +1,6 @@
+@GenshinFan_API_REST_ASPNET_HostAddress = http://localhost:5117
+
+GET {{GenshinFan_API_REST_ASPNET_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
