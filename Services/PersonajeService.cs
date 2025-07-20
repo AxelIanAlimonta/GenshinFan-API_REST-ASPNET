@@ -36,18 +36,22 @@ public class PersonajeService
 
     public async Task<Personaje?> UpdateAsync(int id, Personaje personaje)
     {
-        if (id != personaje.Id)
-        {
-            return null;
-        }
         var existingPersonaje = await _context.Personajes.FindAsync(id);
         if (existingPersonaje == null)
         {
             return null;
         }
-        _context.Entry(personaje).State = EntityState.Modified;
+        existingPersonaje.Nombre = personaje.Nombre;
+        existingPersonaje.Descripcion = personaje.Descripcion;
+        existingPersonaje.Rareza = personaje.Rareza;
+        existingPersonaje.AvatarURL = personaje.AvatarURL;
+        existingPersonaje.SplashArtURL = personaje.SplashArtURL;
+        existingPersonaje.TarjetaURL = personaje.TarjetaURL;
+        existingPersonaje.FechaLanzamiento = personaje.FechaLanzamiento;
+        existingPersonaje.ElementoId = personaje.ElementoId;
+        existingPersonaje.RegionId = personaje.RegionId;
         await _context.SaveChangesAsync();
-        return personaje;
+        return existingPersonaje;
     }
 
     public async Task<bool> DeleteAsync(int id)
