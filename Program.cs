@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using GenshinFan_API_REST_ASPNET.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +18,12 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonDateOnlyConverter());
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -46,3 +53,24 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Clase personalizada para el formato de fecha
+public class JsonDateOnlyConverter : JsonConverter<DateTime?>
+{
+    private const string Format = "yyyy-MM-dd";
+    public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var value = reader.GetString();
+        if (DateTime.TryParseExact(value, Format, null, System.Globalization.DateTimeStyles.None, out var date))
+            return date;
+        return null;
+    }
+
+    public override void Write(Utf8JsonWriter writer, DateTime? value, JsonSerializerOptions options)
+    {
+        if (value.HasValue)
+            writer.WriteStringValue(value.Value.ToString(Format));
+        else
+            writer.WriteNullValue();
+    }
+}
