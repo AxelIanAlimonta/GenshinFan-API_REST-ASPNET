@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenshinFan_API_REST_ASPNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250722022836_AgregarImagenPersonaje")]
+    partial class AgregarImagenPersonaje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,9 +51,6 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("PersonajeId")
                         .HasColumnType("int");
 
@@ -61,7 +61,7 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
                     b.HasIndex("PersonajeId");
 
-                    b.ToTable("ImagenesPersonajes");
+                    b.ToTable("ImagenPersonaje");
                 });
 
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Personaje", b =>

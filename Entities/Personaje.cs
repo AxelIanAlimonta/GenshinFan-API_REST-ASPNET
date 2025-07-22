@@ -13,10 +13,12 @@ public class Personaje
 
     public DateTime? FechaLanzamiento { get; set; }
 
-    public int? ElementoId { get; set; }          
-    public Elemento? Elemento { get; set; }       
+    public int? ElementoId { get; set; }
+    public Elemento? Elemento { get; set; }
 
-    public int? RegionId { get; set; }            
+    public int? RegionId { get; set; }
     public Region? Region { get; set; }
+
+    public ICollection<ImagenPersonaje>? Imagenes { get; set; }
 
 }
