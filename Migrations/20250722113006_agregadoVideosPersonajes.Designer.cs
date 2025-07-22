@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenshinFan_API_REST_ASPNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250722113006_agregadoVideosPersonajes")]
+    partial class agregadoVideosPersonajes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,7 +186,7 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.VideoPersonaje", b =>
                 {
                     b.HasOne("GenshinFan_API_REST_ASPNET.Entities.Personaje", "Personaje")
-                        .WithMany("Videos")
+                        .WithMany()
                         .HasForeignKey("PersonajeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -194,8 +197,6 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Personaje", b =>
                 {
                     b.Navigation("Imagenes");
-
-                    b.Navigation("Videos");
                 });
 #pragma warning restore 612, 618
         }

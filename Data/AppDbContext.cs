@@ -10,7 +10,9 @@ public class AppDbContext : DbContext
     public DbSet<Elemento> Elementos { get; set; }
     public DbSet<Region> Regiones { get; set; }
     public DbSet<Personaje> Personajes { get; set; }
-    public DbSet<ImagenPersonaje> ImagenesPersonajes{ get; set; }
+    public DbSet<ImagenPersonaje> ImagenesPersonajes { get; set; }
+    public DbSet<VideoPersonaje> VideosPersonajes { get; set; }
+
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

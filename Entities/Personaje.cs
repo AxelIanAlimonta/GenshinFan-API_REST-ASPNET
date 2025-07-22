@@ -20,5 +20,6 @@ public class Personaje
     public Region? Region { get; set; }
 
     public ICollection<ImagenPersonaje>? Imagenes { get; set; }
+    public ICollection<VideoPersonaje>? Videos { get; set; }
 
 }

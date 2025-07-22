@@ -67,11 +67,7 @@ public class ImagenPersonajeController : ControllerBase
     public async Task<ActionResult<List<ImagenPersonaje>>> GetByPersonajeId(int personajeId)
     {
         var imagenes = await _imagenPersonajeService.GetByPersonajeIdAsync(personajeId);
-        if (imagenes == null || !imagenes.Any())
-        {
-            return NotFound();
-        }
-        return Ok(imagenes);
+        return Ok(imagenes ?? new List<ImagenPersonaje>());
     }
 
 }
