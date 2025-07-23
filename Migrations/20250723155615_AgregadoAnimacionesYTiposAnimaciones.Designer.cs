@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenshinFan_API_REST_ASPNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250723155615_AgregadoAnimacionesYTiposAnimaciones")]
+    partial class AgregadoAnimacionesYTiposAnimaciones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("PersonajeId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TipoAnimacionId")
                         .HasColumnType("int");
 
@@ -39,8 +39,6 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PersonajeId");
 
                     b.HasIndex("TipoAnimacionId");
 
@@ -202,15 +200,9 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Animacion", b =>
                 {
-                    b.HasOne("GenshinFan_API_REST_ASPNET.Entities.Personaje", "Personaje")
-                        .WithMany("Animaciones")
-                        .HasForeignKey("PersonajeId");
-
                     b.HasOne("GenshinFan_API_REST_ASPNET.Entities.TipoAnimacion", "TipoAnimacion")
                         .WithMany()
                         .HasForeignKey("TipoAnimacionId");
-
-                    b.Navigation("Personaje");
 
                     b.Navigation("TipoAnimacion");
                 });
@@ -254,8 +246,6 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Personaje", b =>
                 {
-                    b.Navigation("Animaciones");
-
                     b.Navigation("Imagenes");
 
                     b.Navigation("Videos");

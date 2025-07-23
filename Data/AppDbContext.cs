@@ -12,6 +12,8 @@ public class AppDbContext : DbContext
     public DbSet<Personaje> Personajes { get; set; }
     public DbSet<ImagenPersonaje> ImagenesPersonajes { get; set; }
     public DbSet<VideoPersonaje> VideosPersonajes { get; set; }
+    public DbSet<Animacion> Animaciones { get; set; }
+    public DbSet<TipoAnimacion> TiposAnimaciones { get; set; }
 
 
 
