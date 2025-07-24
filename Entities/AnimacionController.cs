@@ -70,15 +70,17 @@ public class AnimacionController : ControllerBase
         return NoContent();
     }
 
+
     [HttpGet("personaje/{personajeId}")]
     public async Task<IActionResult> GetByPersonajeId(int personajeId)
     {
         var animaciones = await _animacionService.GetByPersonajeIdAsync(personajeId);
         if (animaciones == null || !animaciones.Any())
         {
-            return NotFound();
+            return Ok(new List<Animacion>());
         }
         return Ok(animaciones);
+
     }
 
     //obtener animacion por id personaje y nombre del tipo de animacion
