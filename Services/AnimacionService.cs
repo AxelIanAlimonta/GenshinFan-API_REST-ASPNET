@@ -55,11 +55,22 @@ public class AnimacionService
         return true;
     }
 
-    public async Task<List<Animacion>> GetByTipoAnimacionAsync(string tipoAnimacion)
+    //obtener animacion por Id de Personaje
+    public async Task<List<Animacion>> GetByPersonajeIdAsync(int personajeId)
     {
         return await _context.Animaciones
             .Include(a => a.TipoAnimacion)
-            .Where(a => a.TipoAnimacion != null && a.TipoAnimacion.Nombre == tipoAnimacion)
+            .Where(a => a.PersonajeId == personajeId)
             .ToListAsync();
     }
+
+    //obtener animacion por id personaje y nombre del tipo de animacion
+    public async Task<List<Animacion>> GetByPersonajeIdAndTipoAsync(int personajeId, string tipoAnimacion)
+    {
+        return await _context.Animaciones
+            .Include(a => a.TipoAnimacion)
+            .Where(a => a.PersonajeId == personajeId && a.TipoAnimacion != null && a.TipoAnimacion.Nombre == tipoAnimacion)
+            .ToListAsync();
+    }
+
 }

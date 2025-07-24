@@ -70,11 +70,22 @@ public class AnimacionController : ControllerBase
         return NoContent();
     }
 
-    //Traer animacion por nombre del tipo de animacion
-    [HttpGet("tipo/{tipoNombre}")]
-    public async Task<IActionResult> GetByTipoNombre(string tipoNombre)
+    [HttpGet("personaje/{personajeId}")]
+    public async Task<IActionResult> GetByPersonajeId(int personajeId)
     {
-        var animaciones = await _animacionService.GetByTipoAnimacionAsync(tipoNombre);
+        var animaciones = await _animacionService.GetByPersonajeIdAsync(personajeId);
+        if (animaciones == null || !animaciones.Any())
+        {
+            return NotFound();
+        }
+        return Ok(animaciones);
+    }
+
+    //obtener animacion por id personaje y nombre del tipo de animacion
+    [HttpGet("personaje/{personajeId}/tipo/{tipoAnimacionNombre}")]
+    public async Task<IActionResult> GetByPersonajeIdAndTipo(int personajeId, string tipoAnimacionNombre)
+    {
+        var animaciones = await _animacionService.GetByPersonajeIdAndTipoAsync(personajeId, tipoAnimacionNombre);
         if (animaciones == null || !animaciones.Any())
         {
             return NotFound();
