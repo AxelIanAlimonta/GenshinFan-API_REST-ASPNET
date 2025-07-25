@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenshinFan_API_REST_ASPNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250725111420_AgregadaEtiquetaYRelacionesConImagenesYVideos")]
+    partial class AgregadaEtiquetaYRelacionesConImagenesYVideos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +112,7 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Etiquetas");
+                    b.ToTable("Etiqueta");
                 });
 
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Imagen", b =>
@@ -133,7 +136,7 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
                     b.HasIndex("PersonajeId");
 
-                    b.ToTable("Imagenes");
+                    b.ToTable("ImagenesPersonajes");
                 });
 
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Personaje", b =>
@@ -240,7 +243,7 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
                     b.HasIndex("PersonajeId");
 
-                    b.ToTable("Videos");
+                    b.ToTable("VideosPersonajes");
                 });
 
             modelBuilder.Entity("EtiquetaImagen", b =>

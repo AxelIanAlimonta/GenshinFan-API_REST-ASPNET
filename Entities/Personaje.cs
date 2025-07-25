@@ -20,8 +20,8 @@ public class Personaje
     public Region? Region { get; set; }
 
 
-    public ICollection<ImagenPersonaje>? Imagenes { get; set; }
-    public ICollection<VideoPersonaje>? Videos { get; set; }
+    public ICollection<Imagen>? Imagenes { get; set; }
+    public ICollection<Video>? Videos { get; set; }
     public ICollection<Animacion>? Animaciones{ get; set; }
 
 }

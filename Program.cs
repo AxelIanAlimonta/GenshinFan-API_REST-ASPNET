@@ -30,8 +30,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ElementoService>();
 builder.Services.AddScoped<RegionService>();
 builder.Services.AddScoped<PersonajeService>();
-builder.Services.AddScoped<ImagenPersonajeService>();
-builder.Services.AddScoped<VideoPersonajeService>();
+builder.Services.AddScoped<ImagenService>();
+builder.Services.AddScoped<VideoService>();
 builder.Services.AddScoped<TipoAnimacionService>();
 builder.Services.AddScoped<AnimacionService>();
 

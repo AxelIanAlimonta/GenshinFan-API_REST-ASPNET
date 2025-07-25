@@ -2,7 +2,7 @@
 
 namespace GenshinFan_API_REST_ASPNET.Entities;
 
-public class ImagenPersonaje
+public class Imagen
 {
     public int Id { get; set; }
 
@@ -10,6 +10,7 @@ public class ImagenPersonaje
 
     public int? Calificacion { get; set; }
 
-    public int PersonajeId { get; set; }
+    public int? PersonajeId { get; set; }
     public Personaje? Personaje { get; set; }
+    public List<Etiqueta>? Etiquetas { get; set; }
 }

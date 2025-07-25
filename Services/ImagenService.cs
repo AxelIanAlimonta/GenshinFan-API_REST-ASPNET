@@ -3,33 +3,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GenshinFan_API_REST_ASPNET.Services;
 
-public class ImagenPersonajeService
+public class ImagenService
 {
     private readonly AppDbContext _context;
 
-    public ImagenPersonajeService(AppDbContext context)
+    public ImagenService(AppDbContext context)
     {
         _context = context;
     }
 
-    async public Task<List<ImagenPersonaje>> GetAllAsync()
+    async public Task<List<Imagen>> GetAllAsync()
     {
-        return await _context.ImagenesPersonajes.ToListAsync();
+        return await _context.Imagenes.ToListAsync();
     }
 
-    async public Task<ImagenPersonaje?> GetByIdAsync(int id)
+    async public Task<Imagen?> GetByIdAsync(int id)
     {
-        return await _context.ImagenesPersonajes.FindAsync(id);
+        return await _context.Imagenes.FindAsync(id);
     }
 
-    async public Task<ImagenPersonaje> CreateAsync(ImagenPersonaje imagenPersonaje)
+    async public Task<Imagen> CreateAsync(Imagen imagenPersonaje)
     {
-        _context.ImagenesPersonajes.Add(imagenPersonaje);
+        _context.Imagenes.Add(imagenPersonaje);
         await _context.SaveChangesAsync();
         return imagenPersonaje;
     }
 
-    async public Task<ImagenPersonaje?> UpdateAsync(int id, ImagenPersonaje imagenPersonaje)
+    async public Task<Imagen?> UpdateAsync(int id, Imagen imagenPersonaje)
     {
         if (id != imagenPersonaje.Id)
         {
@@ -42,19 +42,19 @@ public class ImagenPersonajeService
 
     async public Task<bool> DeleteAsync(int id)
     {
-        var imagenPersonaje = await _context.ImagenesPersonajes.FindAsync(id);
+        var imagenPersonaje = await _context.Imagenes.FindAsync(id);
         if (imagenPersonaje == null)
         {
             return false;
         }
-        _context.ImagenesPersonajes.Remove(imagenPersonaje);
+        _context.Imagenes.Remove(imagenPersonaje);
         await _context.SaveChangesAsync();
         return true;
     }
 
-    async public Task<List<ImagenPersonaje>> GetByPersonajeIdAsync(int personajeId)
+    async public Task<List<Imagen>> GetByPersonajeIdAsync(int personajeId)
     {
-        return await _context.ImagenesPersonajes
+        return await _context.Imagenes
             .Where(ip => ip.PersonajeId == personajeId)
             .ToListAsync();
     }

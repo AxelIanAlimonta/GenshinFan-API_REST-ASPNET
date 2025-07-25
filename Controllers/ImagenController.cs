@@ -7,24 +7,24 @@ namespace GenshinFan_API_REST_ASPNET.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ImagenPersonajeController : ControllerBase
+public class ImagenController : ControllerBase
 {
-    private readonly ImagenPersonajeService _imagenPersonajeService;
+    private readonly ImagenService _imagenPersonajeService;
 
-    public ImagenPersonajeController(ImagenPersonajeService imagenPersonajeService)
+    public ImagenController(ImagenService imagenPersonajeService)
     {
         _imagenPersonajeService = imagenPersonajeService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<ImagenPersonaje>>> GetAll()
+    public async Task<ActionResult<List<Imagen>>> GetAll()
     {
         var imagenes = await _imagenPersonajeService.GetAllAsync();
         return Ok(imagenes);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ImagenPersonaje>> GetById(int id)
+    public async Task<ActionResult<Imagen>> GetById(int id)
     {
         var imagen = await _imagenPersonajeService.GetByIdAsync(id);
         if (imagen == null)
@@ -35,14 +35,14 @@ public class ImagenPersonajeController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ImagenPersonaje>> Create(ImagenPersonaje imagenPersonaje)
+    public async Task<ActionResult<Imagen>> Create(Imagen imagenPersonaje)
     {
         var createdImagen = await _imagenPersonajeService.CreateAsync(imagenPersonaje);
         return CreatedAtAction(nameof(GetById), new { id = createdImagen.Id }, createdImagen);
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<ImagenPersonaje>> Update(int id, ImagenPersonaje imagenPersonaje)
+    public async Task<ActionResult<Imagen>> Update(int id, Imagen imagenPersonaje)
     {
         var updatedImagen = await _imagenPersonajeService.UpdateAsync(id, imagenPersonaje);
         if (updatedImagen == null)
@@ -64,10 +64,10 @@ public class ImagenPersonajeController : ControllerBase
     }
 
     [HttpGet("personaje/{personajeId}")]
-    public async Task<ActionResult<List<ImagenPersonaje>>> GetByPersonajeId(int personajeId)
+    public async Task<ActionResult<List<Imagen>>> GetByPersonajeId(int personajeId)
     {
         var imagenes = await _imagenPersonajeService.GetByPersonajeIdAsync(personajeId);
-        return Ok(imagenes ?? new List<ImagenPersonaje>());
+        return Ok(imagenes ?? new List<Imagen>());
     }
 
 }

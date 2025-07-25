@@ -10,10 +10,11 @@ public class AppDbContext : DbContext
     public DbSet<Elemento> Elementos { get; set; }
     public DbSet<Region> Regiones { get; set; }
     public DbSet<Personaje> Personajes { get; set; }
-    public DbSet<ImagenPersonaje> ImagenesPersonajes { get; set; }
-    public DbSet<VideoPersonaje> VideosPersonajes { get; set; }
+    public DbSet<Imagen> Imagenes { get; set; }
+    public DbSet<Video> Videos { get; set; }
     public DbSet<Animacion> Animaciones { get; set; }
     public DbSet<TipoAnimacion> TiposAnimaciones { get; set; }
+    public DbSet<Etiqueta> Etiquetas { get; set; }
 
 
 

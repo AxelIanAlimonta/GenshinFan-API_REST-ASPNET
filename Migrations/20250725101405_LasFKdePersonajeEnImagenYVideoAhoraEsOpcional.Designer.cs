@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenshinFan_API_REST_ASPNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250725101405_LasFKdePersonajeEnImagenYVideoAhoraEsOpcional")]
+    partial class LasFKdePersonajeEnImagenYVideoAhoraEsOpcional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,36 +23,6 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("EtiquetaImagen", b =>
-                {
-                    b.Property<int>("EtiquetasId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ImagenesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EtiquetasId", "ImagenesId");
-
-                    b.HasIndex("ImagenesId");
-
-                    b.ToTable("EtiquetaImagen");
-                });
-
-            modelBuilder.Entity("EtiquetaVideo", b =>
-                {
-                    b.Property<int>("EtiquetasId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VideosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EtiquetasId", "VideosId");
-
-                    b.HasIndex("VideosId");
-
-                    b.ToTable("EtiquetaVideo");
-                });
 
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Animacion", b =>
                 {
@@ -96,22 +69,6 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
                     b.ToTable("Elementos");
                 });
 
-            modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Etiqueta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Etiquetas");
-                });
-
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Imagen", b =>
                 {
                     b.Property<int>("Id")
@@ -133,7 +90,7 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
                     b.HasIndex("PersonajeId");
 
-                    b.ToTable("Imagenes");
+                    b.ToTable("ImagenesPersonajes");
                 });
 
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Personaje", b =>
@@ -240,37 +197,7 @@ namespace GenshinFan_API_REST_ASPNET.Migrations
 
                     b.HasIndex("PersonajeId");
 
-                    b.ToTable("Videos");
-                });
-
-            modelBuilder.Entity("EtiquetaImagen", b =>
-                {
-                    b.HasOne("GenshinFan_API_REST_ASPNET.Entities.Etiqueta", null)
-                        .WithMany()
-                        .HasForeignKey("EtiquetasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GenshinFan_API_REST_ASPNET.Entities.Imagen", null)
-                        .WithMany()
-                        .HasForeignKey("ImagenesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EtiquetaVideo", b =>
-                {
-                    b.HasOne("GenshinFan_API_REST_ASPNET.Entities.Etiqueta", null)
-                        .WithMany()
-                        .HasForeignKey("EtiquetasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GenshinFan_API_REST_ASPNET.Entities.Video", null)
-                        .WithMany()
-                        .HasForeignKey("VideosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("VideosPersonajes");
                 });
 
             modelBuilder.Entity("GenshinFan_API_REST_ASPNET.Entities.Animacion", b =>
