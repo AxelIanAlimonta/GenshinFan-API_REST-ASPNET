@@ -34,6 +34,7 @@ builder.Services.AddScoped<ImagenService>();
 builder.Services.AddScoped<VideoService>();
 builder.Services.AddScoped<TipoAnimacionService>();
 builder.Services.AddScoped<AnimacionService>();
+builder.Services.AddScoped<EtiquetaService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
