@@ -1,8 +1,9 @@
-﻿using GenshinFan_API_REST_ASPNET.Services;
+﻿using GenshinFan_API_REST_ASPNET.Entities;
+using GenshinFan_API_REST_ASPNET.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GenshinFan_API_REST_ASPNET.Entities;
+namespace GenshinFan_API_REST_ASPNET.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
