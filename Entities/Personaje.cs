@@ -1,4 +1,6 @@
-﻿namespace GenshinFan_API_REST_ASPNET.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace GenshinFan_API_REST_ASPNET.Entities;
 
 public class Personaje
 {
@@ -20,8 +22,15 @@ public class Personaje
     public Region? Region { get; set; }
 
 
+    [JsonIgnore]
     public ICollection<Imagen>? Imagenes { get; set; }
+
+
+    [JsonIgnore]
     public ICollection<Video>? Videos { get; set; }
-    public ICollection<Animacion>? Animaciones{ get; set; }
+
+
+    [JsonIgnore]
+    public ICollection<Animacion>? Animaciones { get; set; }
 
 }

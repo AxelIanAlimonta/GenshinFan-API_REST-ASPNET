@@ -10,9 +10,11 @@ namespace GenshinFan_API_REST_ASPNET.Controllers;
 public class VideoController : ControllerBase
 {
     private readonly VideoService _videoPersonajeService;
-    public VideoController(VideoService videoPersonajeService)
+    private readonly EtiquetaService _etiquetaService;
+    public VideoController(VideoService videoPersonajeService, EtiquetaService etiquetaService)
     {
         _videoPersonajeService = videoPersonajeService;
+        _etiquetaService = etiquetaService;
     }
 
     [HttpGet]
@@ -63,6 +65,37 @@ public class VideoController : ControllerBase
     {
         var videos = await _videoPersonajeService.GetByPersonajeIdAsync(personajeId);
         return Ok(videos ?? new List<Video>());
+    }
+
+    //recibir parametro videoId y etiquetaId y cargar la relacion a la base de datos
+    [HttpPost("{videoId}/etiqueta/{etiquetaId}")]
+    public async Task<IActionResult> AddEtiquetaToVideo(int videoId, int etiquetaId)
+    {
+        var video = await _videoPersonajeService.GetByIdAsync(videoId);
+        if (video == null)
+        {
+            return NotFound();
+        }
+
+        var etiqueta = await _etiquetaService.GetByIdAsync(etiquetaId);
+        if (etiqueta == null)
+        {
+            return NotFound();
+        }
+
+        if (video.Etiquetas == null)
+        {
+            video.Etiquetas = new List<Etiqueta>();
+        }
+
+        if (video.Etiquetas.Any(e => e.Id == etiquetaId))
+        {
+            return Conflict("La etiqueta ya está asociada a este video.");
+        }
+
+        video.Etiquetas.Add(etiqueta);
+        await _videoPersonajeService.UpdateAsync(video);
+        return Created();
     }
 
 }

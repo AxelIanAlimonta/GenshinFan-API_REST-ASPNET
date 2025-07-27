@@ -12,12 +12,15 @@ public class VideoService
     }
     public async Task<List<Video>> GetAllAsync()
     {
-        return await _context.Videos.ToListAsync();
+        return await _context.Videos.Include(v => v.Etiquetas).ToListAsync();
     }
     public async Task<Video?> GetByIdAsync(int id)
     {
-        return await _context.Videos.FindAsync(id);
+        return await _context.Videos
+            .Include(v => v.Etiquetas)
+            .FirstOrDefaultAsync(v => v.Id == id);
     }
+
     public async Task AddAsync(Video videoPersonaje)
     {
         _context.Videos.Add(videoPersonaje);
@@ -42,6 +45,7 @@ public class VideoService
     {
         return await _context.Videos
             .Where(vp => vp.PersonajeId == personajeId)
+            .Include(vp => vp.Etiquetas)
             .ToListAsync();
     }
 
