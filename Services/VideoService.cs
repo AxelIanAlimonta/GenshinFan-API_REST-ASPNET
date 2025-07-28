@@ -28,9 +28,43 @@ public class VideoService
     }
     public async Task UpdateAsync(Video videoPersonaje)
     {
-        _context.Videos.Update(videoPersonaje);
+        var videoDb = await _context.Videos
+            .Include(v => v.Etiquetas)
+            .FirstOrDefaultAsync(v => v.Id == videoPersonaje.Id);
+
+        if (videoDb == null)
+            throw new Exception("Video no encontrado");
+
+        videoDb.Etiquetas?.Clear();
+
+        if (videoPersonaje.Etiquetas != null)
+        {
+            foreach (var etiqueta in videoPersonaje.Etiquetas)
+            {
+                Etiqueta etiquetaDb;
+                if (etiqueta.Id == 0)
+                {
+                    etiquetaDb = new Etiqueta { Nombre = etiqueta.Nombre };
+                    _context.Etiquetas.Add(etiquetaDb);
+                }
+                else
+                {
+                    etiquetaDb = await _context.Etiquetas.FindAsync(etiqueta.Id);
+                    if (etiquetaDb == null)
+                        throw new Exception($"Etiqueta con Id {etiqueta.Id} no encontrada");
+                }
+                videoDb.Etiquetas?.Add(etiquetaDb);
+            }
+        }
+
+        videoDb.Titulo = videoPersonaje.Titulo;
+        videoDb.Url = videoPersonaje.Url;
+        videoDb.FechaPublicacion = videoPersonaje.FechaPublicacion;
+        videoDb.PersonajeId = videoPersonaje.PersonajeId;
+
         await _context.SaveChangesAsync();
     }
+
     public async Task DeleteAsync(int id)
     {
         var videoPersonaje = await GetByIdAsync(id);
