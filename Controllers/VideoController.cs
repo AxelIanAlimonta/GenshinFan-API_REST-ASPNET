@@ -50,7 +50,8 @@ public class VideoController : ControllerBase
             return BadRequest();
         }
         await _videoPersonajeService.UpdateAsync(videoPersonaje);
-        return NoContent();
+        var updatedVideo = await _videoPersonajeService.GetByIdAsync(id);
+        return Ok(updatedVideo);
     }
 
     [HttpDelete("{id}")]
