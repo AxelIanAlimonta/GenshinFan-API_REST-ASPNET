@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
     public DbSet<Animacion> Animaciones { get; set; }
     public DbSet<TipoAnimacion> TiposAnimaciones { get; set; }
     public DbSet<Etiqueta> Etiquetas { get; set; }
+    public DbSet<RedSocial> RedesSociales { get; set; }
 
 
 
