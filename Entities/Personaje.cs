@@ -11,6 +11,7 @@ public class Personaje
     public int? Rareza { get; set; }
     public string? AvatarURL { get; set; }
     public string? SplashArtURL { get; set; }
+    public string? SplashArtSinFondoURL { get; set; }
     public string? TarjetaURL { get; set; }
 
     public DateTime? FechaLanzamiento { get; set; }

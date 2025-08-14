@@ -46,6 +46,7 @@ public class PersonajeService
         existingPersonaje.Rareza = personaje.Rareza;
         existingPersonaje.AvatarURL = personaje.AvatarURL;
         existingPersonaje.SplashArtURL = personaje.SplashArtURL;
+        existingPersonaje.SplashArtSinFondoURL = personaje.SplashArtSinFondoURL;
         existingPersonaje.TarjetaURL = personaje.TarjetaURL;
         existingPersonaje.FechaLanzamiento = personaje.FechaLanzamiento;
         existingPersonaje.ElementoId = personaje.ElementoId;
