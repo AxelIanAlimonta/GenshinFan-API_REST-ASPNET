@@ -22,15 +22,10 @@ public class Personaje
     public Region? Region { get; set; }
 
 
-    [JsonIgnore]
     public ICollection<Imagen>? Imagenes { get; set; }
 
-
-    [JsonIgnore]
     public ICollection<Video>? Videos { get; set; }
 
-
-    [JsonIgnore]
     public ICollection<Animacion>? Animaciones { get; set; }
 
 }
