@@ -16,6 +16,9 @@ public class PersonajeService
         return await _context.Personajes
             .Include(p => p.Elemento)
             .Include(p => p.Region)
+            .Include(p => p.Imagenes)
+            .Include(p => p.Videos)
+            .Include(p => p.Animaciones)
             .ToListAsync();
     }
 
